@@ -1,0 +1,54 @@
+{%extends "./base.html" %}
+{% block title %} Gestión de Cursos {% endblock %}
+{% block content  %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2>Getión de Cursos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="registrarCurso/" method="POST"> {% csrf_token %}
+                    
+                     <div class="form-group">
+                        {{form}}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado de Cursos</h1>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Creditos</th>
+                    <th colspan="2">Opciones</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for cur in form %}
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td> {{cur.codigo}}</td>
+                    <td> {{cur.nombre}}</td>
+                    <td> {{cur.creditos}}</td>
+                    <td><a href="editarCurso/{{cur.codigo}}" class="btn btn-info btnEditar">Editar</a></td>
+                    <td><a href="eliminarCurso/{{cur.codigo}}" class="btn btn-danger btnEliminar">Eliminar</a></td>
+
+                </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock  %}
